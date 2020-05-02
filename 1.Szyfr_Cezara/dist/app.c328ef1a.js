@@ -138,16 +138,28 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 var caesar13 = function caesar13(input) {
-  var word = _toConsumableArray(input.toLowerCase());
+  var word = _toConsumableArray(input);
 
   var alphabet = _toConsumableArray('abcdefghijklmnopqrstuvwxyz');
 
-  var newWord = word.map(function (letter) {
-    var indexOfLetter = alphabet.indexOf(letter);
-    var newIndex = (indexOfLetter + 13) % alphabet.length;
-    return letter.replace(letter, alphabet[newIndex].toUpperCase());
+  var bigAlphabet = _toConsumableArray('abcdefghijklmnopqrstuvwxyz'.toUpperCase());
+
+  var encryptedSentence = word.map(function (sign) {
+    var newIndex = function newIndex(i) {
+      return (i + 13) % alphabet.length;
+    };
+
+    var encrypt = function encrypt(alph) {
+      return sign.replace(sign, alph[newIndex(alph.indexOf(sign))]);
+    };
+
+    var checkSmallLetter = alphabet.includes(sign);
+    var checkBigLetter = bigAlphabet.includes(sign.toUpperCase());
+    if (checkSmallLetter) return encrypt(alphabet);else if (checkBigLetter) return encrypt(bigAlphabet);
+    return sign;
   });
-  return newWord.join('');
+  if (input === '') return 'Fill me with some text !';
+  return "= ".concat(encryptedSentence.join(''));
 };
 
 var _default = caesar13;
@@ -159,7 +171,17 @@ var _caesar = _interopRequireDefault(require("./caesar13"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-console.log((0, _caesar.default)('Przeprogramowani'));
+// console.log(caesar('Przeprogramowani'));
+var input = document.querySelector('input');
+var output = document.querySelector('.encrypted');
+var captured = document.querySelector('.captured');
+document.addEventListener('keydown', function (key) {
+  if (key.which === 13) {
+    output.textContent = (0, _caesar.default)(input.value);
+    captured.textContent = "".concat(input.value);
+    input.value = '';
+  }
+});
 },{"./caesar13":"caesar13.js"}],"C:/Users/Krystepan/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -188,7 +210,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49282" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58440" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
