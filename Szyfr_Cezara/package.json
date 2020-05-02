@@ -1,0 +1,12 @@
+{
+  "name": "Szyfr_Cezara",
+  "version": "1.0.0",
+  "description": "1. Type `npm install -G parcel-bundler` to the console\r 2. Type `parcel index.html` and open generated link",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
